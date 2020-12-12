@@ -1,27 +1,27 @@
 #include<iostream>
 #include<iomanip>
 #include<string.h>
-# define N 6
+# define N 5
 
 using namespace std;
 
 class Shape{
 public:
-	virtual void print() { }; 
-	virtual double area(){ return 0;} 
-	virtual double volume(){ return 0;}
+	virtual void print() = 0;
+	virtual double area() = 0;
+	virtual double volume() = 0;
 };
 
 class TwoDShape : public Shape{
 public:
-	virtual void print() {}
-	virtual double area() { return 0; }
+	virtual void print() = 0;
+	virtual double area() = 0;
 };
 
 class ThreeDShape : public Shape{
 public:
-	virtual void print() {}
-	virtual double volume() { return 0; }
+	virtual void print() = 0;
+	virtual double volume() = 0;
 };
 
 
@@ -37,6 +37,8 @@ public:
 	double area() { 
 		return height * side; 
 	}
+
+	double volume() { return 0; }
 };
 
 class circle : public TwoDShape {
@@ -51,6 +53,8 @@ public:
 	double area() {
 		return 3.14 * radius * radius;
 	}
+
+	double volume() { return 0; }
 };
 
 class cube : public ThreeDShape{
@@ -65,13 +69,15 @@ public:
 	double volume() { 
 		return side * side * side; 
 	}
+
+	double area() { return 0; }
 };
 
 class cylinder : public ThreeDShape{
 	int height, radius;
 public:
 	void print() {
-		cout << "It's a cylinder. Height: " << height << "Radius: " << radius << endl;
+		cout << "It's a cylinder. Height: " << height << ". Radius: " << radius << endl;
 	}
 
 	cylinder(int _height, int _radius) : height(_height), radius(_radius) {}
@@ -79,6 +85,8 @@ public:
 	double volume() { 
 		return 3.14 * radius * radius * height; 
 	}
+
+	double area() { return 0; }
 
 };
 
@@ -94,20 +102,8 @@ public:
 	double volume() { 
 		return height * width * length; 
 	}
-};
 
-class sphere :public ThreeDShape {
-	int radius;
-public:
-	void print() {
-		cout << "It's a sphere. Radius: " << radius << endl;
-	}
-
-	sphere(int _radius) :radius(_radius) {}
-
-	double valume() {
-		return 4 / 3 * 3.14 * radius * radius * radius;
-	}
+	double area() { return 0; }
 };
 
 int main(){
@@ -118,13 +114,12 @@ int main(){
 	cube c(3); 
 	cylinder d(6, 1); 
 	parallelepiped e(3, 5, 7);
-	sphere f(8);
+	//sphere f(8);
 	p[0] = &a; 
 	p[1] = &b; 
 	p[2] = &c; 
 	p[3] = &d;	
 	p[4] = &e; 
-	p[5] = &f;
 	for (int i = 0; i < N; i++) {
 		p[i]->print(); 
 			area = p[i]->area(); 
